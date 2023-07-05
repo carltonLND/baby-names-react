@@ -1,3 +1,61 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html {
   background: #f8f8f8;
+}
+
+.App-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App {
+  width: 60vw;
+  padding: 10px;
+  border-radius: 10px;
+  border-left: 5px solid #ffc6e5;
+  border-top: 5px solid #ffc6e5;
+  border-right: 5px solid #a0cfee;
+  border-bottom: 5px solid #a0cfee;
+}
+
+.divider {
+  margin: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  border: 1px solid lightgray;
+  border-radius: 50%;
+}
+
+.name-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+}
+
+.name-card {
+  background: lightgreen;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.sex-m {
+  background: #a0cfee;
+  color: #1f5a81;
+}
+
+.sex-f {
+  background: #ffc6e5;
+  color: #980856;
 }
