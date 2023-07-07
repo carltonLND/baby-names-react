@@ -11,9 +11,10 @@ export function NameFilter({ handleSearch, handleClick }: NameSearchProps) {
   const [inputValue, setInputValue] = useState("");
 
   return (
-    <>
+    <section className="name-filter">
       <input
-        placeholder="Search for a name"
+        className="name-search"
+        placeholder="Search for a name..."
         value={inputValue}
         onChange={(e) => {
           const text = e.target.value;
@@ -22,6 +23,7 @@ export function NameFilter({ handleSearch, handleClick }: NameSearchProps) {
         }}
       />
       <button
+        className="btn-filter btn-all"
         onClick={() => {
           handleClick("all", inputValue);
         }}
@@ -29,6 +31,7 @@ export function NameFilter({ handleSearch, handleClick }: NameSearchProps) {
         All Names
       </button>
       <button
+        className="btn-filter btn-f"
         onClick={() => {
           handleClick("f", inputValue);
         }}
@@ -36,12 +39,13 @@ export function NameFilter({ handleSearch, handleClick }: NameSearchProps) {
         F Names
       </button>
       <button
+        className="btn-filter btn-m"
         onClick={() => {
           handleClick("m", inputValue);
         }}
       >
         M Names
       </button>
-    </>
+    </section>
   );
 }
