@@ -8,21 +8,64 @@ html {
 }
 
 .App-container {
-  height: 100vh;
-  width: 100vw;
+  margin-top: 5em;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .App {
-  width: 60vw;
+  width: 70vw;
   padding: 10px;
   border-radius: 10px;
   border-left: 5px solid #ffc6e5;
   border-top: 5px solid #ffc6e5;
   border-right: 5px solid #a0cfee;
   border-bottom: 5px solid #a0cfee;
+}
+
+.name-filter {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+
+.name-search {
+  height: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  padding: 10px;
+}
+
+.btn-filter {
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  width: 35px;
+  font-size: 20px;
+  color: #36454f;
+}
+
+.btn-f {
+  background: #ffc6e5;
+  color: #980856;
+  box-shadow: 0 4px 1px -1px black;
+}
+
+.btn-m {
+  background: #a0cfee;
+  color: #1f5a81;
+  box-shadow: 0 4px 1px -1px none;
+}
+
+.fav-title {
+  color: gray;
+  font-weight: 400;
+  margin-left: 1em;
 }
 
 .divider {
