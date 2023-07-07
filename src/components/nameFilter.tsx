@@ -1,4 +1,9 @@
 import { useState } from "react";
+import {
+  WiMoonAltFirstQuarter,
+  WiMoonAltThirdQuarter,
+  WiMoonFull,
+} from "react-icons/wi";
 
 export type FilterState = "all" | "f" | "m";
 
@@ -9,6 +14,8 @@ interface NameSearchProps {
 
 export function NameFilter({ handleSearch, handleClick }: NameSearchProps) {
   const [inputValue, setInputValue] = useState("");
+  //@ts-ignore
+  const [activeFilter, setactiveFilter] = useState<FilterState>("all");
 
   return (
     <section className="name-filter">
@@ -24,27 +31,39 @@ export function NameFilter({ handleSearch, handleClick }: NameSearchProps) {
       />
       <button
         className="btn-filter btn-all"
+        style={{
+          boxShadow: activeFilter === "all" ? "0 4px 1px -1px black" : "none",
+        }}
         onClick={() => {
           handleClick("all", inputValue);
+          setactiveFilter("all");
         }}
       >
-        All Names
+        <WiMoonFull />
       </button>
       <button
         className="btn-filter btn-f"
+        style={{
+          boxShadow: activeFilter === "f" ? "0 4px 1px -1px black" : "none",
+        }}
         onClick={() => {
           handleClick("f", inputValue);
+          setactiveFilter("f");
         }}
       >
-        F Names
+        <WiMoonAltFirstQuarter />
       </button>
       <button
         className="btn-filter btn-m"
+        style={{
+          boxShadow: activeFilter === "m" ? "0 4px 1px -1px black" : "none",
+        }}
         onClick={() => {
           handleClick("m", inputValue);
+          setactiveFilter("m");
         }}
       >
-        M Names
+        <WiMoonAltThirdQuarter />
       </button>
     </section>
   );
