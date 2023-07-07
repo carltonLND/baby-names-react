@@ -5,43 +5,43 @@ import { BabyNameCard } from "./babyName";
 import { sortNames, BabyNameData } from "../utils/sortNames";
 import { NameFilter, FilterState } from "./nameFilter";
 
-function App() {
+export default function App() {
   const sortedNames = useMemo(() => sortNames(babyNames), []);
   const [remainingNames, setRemainingNames] = useState(sortedNames);
   const [favoriteNames, setFavoriteNames] = useState<BabyNameData[]>([]);
-  //@ts-ignore
   const [sexState, setSexState] = useState<FilterState>("all");
 
   const handleOnClickAll = (babyName: BabyNameData) => {
-    let selectedName: BabyNameData;
+    setFavoriteNames((prevFavs) => {
+      const newFavorites = [...prevFavs];
 
-    setRemainingNames((prev) => {
-      const newNames = [...prev];
-      const nameIndex = newNames.indexOf(babyName);
-      selectedName = newNames.splice(nameIndex, 1)[0];
-      return newNames;
-    });
+      setRemainingNames((prev) => {
+        const newNames = [...prev];
+        const nameIndex = newNames.indexOf(babyName);
+        const selectedName = newNames.splice(nameIndex, 1)[0];
+        newFavorites.push(selectedName);
 
-    setFavoriteNames((prev) => {
-      const newFavorites = [...prev];
-      newFavorites.push(selectedName);
+        return newNames;
+      });
+
       return newFavorites;
     });
   };
 
   const handleOnClickFav = (babyName: BabyNameData) => {
-    setFavoriteNames((prev) => {
-      const favoriteNames = [...prev];
-      const nameIndex = favoriteNames.indexOf(babyName);
-      const selectedName = favoriteNames.splice(nameIndex, 1)[0];
+    setFavoriteNames((prevFavs) => {
+      const favoriteNames = [...prevFavs];
 
-      // dirty fix, is executed twice...
       setRemainingNames((prev) => {
+        const nameIndex = favoriteNames.indexOf(babyName);
+        const selectedName = favoriteNames.splice(nameIndex, 1)[0];
         const newNames = [...prev];
         newNames.push(selectedName);
-        return sortNames(newNames).filter(({ sex }) => {
-          return sexState === "all" ? true : sexState === sex;
-        });
+        const filteredNewNames = newNames.filter(({ sex }) =>
+          sexState === "all" ? true : sexState === sex
+        );
+
+        return sortNames(filteredNewNames);
       });
 
       return favoriteNames;
@@ -57,7 +57,6 @@ function App() {
     const filteredNames = filterByName(searchString).filter(({ sex }) =>
       sexFilter === "all" ? true : sex === sexFilter
     );
-
     setRemainingNames(filteredNames);
     setSexState(sexFilter);
   };
@@ -73,9 +72,11 @@ function App() {
     <div className="App-container">
       <div className="App">
         <NameFilter handleSearch={handleSearch} handleClick={handleFilter} />
-        <h2 className="fav-title">Favourites:</h2>
-        <section className="name-container">
-          {mapBabyNames(favoriteNames, handleOnClickFav)}
+        <section className="fav-container">
+          <h2 className="fav-title">Favourites:</h2>
+          <section className="name-container">
+            {mapBabyNames(favoriteNames, handleOnClickFav)}
+          </section>
         </section>
         <div className="divider"></div>
         <section className="name-container">
@@ -86,8 +87,6 @@ function App() {
     </div>
   );
 }
-
-export default App;
 
 function mapBabyNames(
   babyNameArray: BabyNameData[],
